@@ -45,6 +45,7 @@ jobs:
 
     - name: Build
       run: |
+        source ${{ runner.temp }}/emsdk/emsdk_env.sh
         ls ${{ env.QT_ROOT_DIR }}/..
         export QT_HOST_PATH=${{ env.QT_ROOT_DIR }}/../gcc_64
         chmod +x ${{ env.QT_ROOT_DIR }}/bin/qt-cmake
