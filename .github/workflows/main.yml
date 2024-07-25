@@ -37,7 +37,8 @@ jobs:
     - name: Build
       run: |
         ls ${{ env.QT_ROOT_DIR }}/..
-        export QT_HOST_PATH=${{ env.QT_ROOT_DIR }}/../linux_gcc_64
+        export QT_HOST_PATH=${{ env.QT_ROOT_DIR }}/../gcc_64
+        chmod +x ${{ env.QT_ROOT_DIR }}/bin/qt-cmake
         ${{ env.QT_ROOT_DIR }}/bin/qt-cmake -B ./build
         cmake --build build
         cd build
