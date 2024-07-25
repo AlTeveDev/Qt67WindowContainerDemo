@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
         Qt::QueuedConnection);
     engine.load(url);
     QQuickWindow *window = qobject_cast<QQuickWindow*>(engine.rootObjects().at(0));
-    window.show();
+    window->show();
 
     return app.exec();
 }
