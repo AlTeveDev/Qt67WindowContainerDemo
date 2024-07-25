@@ -6,7 +6,7 @@ Window {
     id: rootWindow
     width: 640
     height: 480
-    visible: true
+    //visible: true
     title: qsTr("Hello World")
 
     WindowCreator {
