@@ -51,5 +51,18 @@ jobs:
         chmod +x ${{ env.QT_ROOT_DIR }}/bin/qt-cmake
         ${{ env.QT_ROOT_DIR }}/bin/qt-cmake -B ./build
         cmake --build build
-        cd build
-        ls
+
+    - name: Package
+      run: |
+        mkdir public
+        cp build/*.js build/*.wasm build/qtlogo.svg public
+        cp build/*.html public/index.html
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: public/
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
