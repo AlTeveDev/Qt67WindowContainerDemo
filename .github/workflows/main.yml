@@ -42,6 +42,3 @@ jobs:
         cmake --build build
         cd build
         ls
-        
-
-    - 
