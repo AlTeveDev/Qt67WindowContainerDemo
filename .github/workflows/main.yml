@@ -13,7 +13,7 @@ jobs:
     - name: Install Host Qt
       uses: jurplel/install-qt-action@v4
       with:
-        version: 6.7.*
+        version: 6.7.2
         host: 'linux'
         target: 'desktop'
         arch: 'linux_gcc_64'
@@ -26,7 +26,7 @@ jobs:
       uses: jurplel/install-qt-action@v4
       with:
         aqtsource: 'git+https://github.com/AlTeveDev/aqtinstall'
-        version: 6.7.*
+        version: 6.7.2
         host: 'linux'
         target: 'desktop'
         arch: 'wasm_singlethread'
