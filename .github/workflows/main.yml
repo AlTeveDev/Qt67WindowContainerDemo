@@ -25,7 +25,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v4
       with:
-        aqtinstall: 'git+https://github.com/AlTeveDev/aqtinstall'
+        aqtsource: 'git+https://github.com/AlTeveDev/aqtinstall'
         version: 6.7.*
         host: 'linux'
         target: 'desktop'
