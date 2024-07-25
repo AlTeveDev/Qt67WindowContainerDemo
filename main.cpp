@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
     engine.load(url);
-    QQuickWindow *window = qobject_cast<QQuickWindow>(engine.rootObjects().at(0));
+    QQuickWindow *window = qobject_cast<QQuickWindow*>(engine.rootObjects().at(0));
     window.show();
 
     return app.exec();
