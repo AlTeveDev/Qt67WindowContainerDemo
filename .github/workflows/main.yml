@@ -37,6 +37,7 @@ jobs:
     - name: Install emsdk
       run: |
         curl -fLs https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.50.tar.gz > ${{ runner.temp }}/emsdk.tar.gz
+        modir -p ${{ runner.temp }}/emsdk
         tar --strip-components 1 -C ${{ runner.temp }}/emsdk -xf ${{ runner.temp }}/emsdk.tar.gz
         rm -f ${{ runner.temp }}/emsdk.tar.gz
         emsdk install 3.1.50
