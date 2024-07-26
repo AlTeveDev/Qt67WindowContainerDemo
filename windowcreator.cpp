@@ -18,7 +18,7 @@ void WindowCreator::createWindow() {
     QQmlComponent *component = new QQmlComponent(&m_engine, QUrl(QStringLiteral("qrc:/WindowInWindow/Main.qml")), &m_engine);
     if (component->isLoading())
         QObject::connect(component, &QQmlComponent::statusChanged,
-                         [=] () {getWindow(component);});
+                         [=] () {getWindow(component);}, Qt::SingleShotConnection);
     else getWindow(component);
 }
 
