@@ -11,10 +11,6 @@ Window {
 
     WindowCreator {
         id: windowCreator
-
-        onWindowCreated: (window) => {
-            container.window = window;
-        }
     }
 
     Rectangle {
@@ -45,6 +41,7 @@ Window {
         id: container
         anchors.fill: parent
         anchors.margins: 30
+        window: windowCreator.window
     }
 
     Text {
