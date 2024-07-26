@@ -9,11 +9,13 @@ WindowCreator::WindowCreator(QObject *parent)
 }
 
 WindowCreator::~WindowCreator() {
+    if (m_createdWindow) m_createdWindow->deleteLater();
     qDebug() << "window creator broke";
 }
 
 void WindowCreator::createWindow() {
     if (m_createdWindow) m_createdWindow->deleteLater();
+    m_createdWindow = nullptr; // for safety
     QQmlComponent *component = new QQmlComponent(&m_engine, QUrl(QStringLiteral("qrc:/WindowInWindow/Main.qml")), &m_engine);
     if (component->isLoading()) {
         m_createdComponent = component;
@@ -26,6 +28,7 @@ void WindowCreator::createWindow() {
 }
 
 void WindowCreator::closeWindow() {
+    if (!m_createdWindow) return;
     m_createdWindow->deleteLater();
     m_createdWindow = nullptr;
     emit windowChanged();
