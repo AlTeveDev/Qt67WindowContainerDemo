@@ -9,16 +9,17 @@ class WindowCreator : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
+    Q_PROPERTY(QQuickWindow* window READ window NOTIFY windowChanged)
 
 signals:
-    void windowCreated(QQuickWindow *window);
+    void windowChanged();
     void error(QString text);
 
 public:
     explicit WindowCreator(QObject *parent = nullptr);
     ~WindowCreator();
 
-    // static WindowCreator *create(QQmlEngine *engine, QJSEngine *scriptEngine);
+    QQuickWindow *window();
 
     Q_INVOKABLE void createWindow();
     Q_INVOKABLE void closeWindow();
