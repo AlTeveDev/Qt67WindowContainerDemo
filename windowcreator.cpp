@@ -25,6 +25,7 @@ void WindowCreator::createWindow() {
 void WindowCreator::closeWindow() {
     m_createdWindow->deleteLater();
     m_createdWindow = nullptr;
+    emit windowChanged();
 }
 
 QQuickWindow *WindowCreator::window() {
