@@ -17,14 +17,11 @@ void WindowCreator::createWindow() {
     if (m_createdWindow) m_createdWindow->deleteLater();
     m_createdWindow = nullptr; // for safety
     QQmlComponent *component = new QQmlComponent(&m_engine, QUrl(QStringLiteral("qrc:/WindowInWindow/Main.qml")), &m_engine);
-    if (component->isLoading()) {
-        m_createdComponent = component;
+    if (component->isLoading())
         QObject::connect(component, &QQmlComponent::statusChanged,
-                         this, &WindowCreator::getWindow);
-    } else {
-        m_createdComponent = component;
-        getWindow();
-    }
+                         [=] () {getWindow(component);});
+    else
+        getWindow(component);
 }
 
 void WindowCreator::closeWindow() {
@@ -38,18 +35,15 @@ QQuickWindow *WindowCreator::window() {
     return m_createdWindow;
 }
 
-void WindowCreator::getWindow() {
-    QObject::connect(m_createdComponent, &QQmlComponent::statusChanged,
-                     this, &WindowCreator::getWindow);
-
-    if (m_createdComponent->status() == QQmlComponent::Error) {
-        emit error(m_createdComponent->errorString());
+void WindowCreator::getWindow(QQmlComponent *component) {
+    if (component->status() == QQmlComponent::Error) {
+        emit error(component->errorString());
         m_createdWindow = nullptr;
         emit windowChanged();
         return;
     }
 
-    QObject *object = m_createdComponent->create();
+    QObject *object = component->create();
     m_createdWindow = qobject_cast<QQuickWindow*>(object);
     if (!m_createdWindow) {
         QQuickItem *item = qobject_cast<QQuickItem*>(object);

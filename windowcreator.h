@@ -26,10 +26,9 @@ public:
     Q_INVOKABLE void closeWindow();
 
 private:
-    void getWindow();
+    void getWindow(QQmlComponent *component);
 
     QQmlEngine m_engine;
-    QQmlComponent *m_createdComponent = nullptr;
     QQuickWindow *m_createdWindow = nullptr;
 };
 
