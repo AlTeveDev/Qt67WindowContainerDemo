@@ -19,7 +19,10 @@ void WindowCreator::createWindow() {
         m_createdComponent = component;
         QObject::connect(component, &QQmlComponent::statusChanged,
                          this, &WindowCreator::getWindow);
-    } else getWindow();
+    } else {
+        m_createdComponent = component;
+        getWindow();
+    }
 }
 
 void WindowCreator::closeWindow() {
