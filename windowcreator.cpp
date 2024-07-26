@@ -27,7 +27,7 @@ void WindowCreator::closeWindow() {
     m_createdWindow = nullptr;
 }
 
-QQuickWindow *window() {
+QQuickWindow *WindowCreator::window() {
     return m_createdWindow;
 }
 
