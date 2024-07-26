@@ -17,7 +17,7 @@ void WindowCreator::createWindow() {
     if (m_createdWindow) m_createdWindow->deleteLater();
     QQmlComponent *component = new QQmlComponent(&m_engine, QUrl(QStringLiteral("qrc:/WindowInWindow/Main.qml")), &m_engine);
     if (component->isLoading())
-        QObject::connect(component, &QQmlComponent::statusChanged,
+        QObject::connect(component, &QQmlComponent::statusChanged, this,
                          [=] () {getWindow(component);}, Qt::SingleShotConnection);
     else getWindow(component);
 }
