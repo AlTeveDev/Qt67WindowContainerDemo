@@ -33,7 +33,7 @@ void WindowCreator::getWindow(QQmlComponent *component) {
 }
 
 void WindowCreator::createWindow() {
-    if (m_createdWindow) QObject::deleteLater(m_createdWindow);
+    if (m_createdWindow) m_createdWindow.deleteLater();
     QQmlComponent *component = new QQmlComponent(&m_engine, QUrl(QStringLiteral("qrc:/WindowInWindow/Main.qml")), &m_engine);
     if (component->isLoading())
         QObject::connect(component, &QQmlComponent::statusChanged,
@@ -42,6 +42,6 @@ void WindowCreator::createWindow() {
 }
 
 void WindowCreator::closeWindow() {
-    QObject::deleteLater(m_createdWindow);
+    m_createdWindow.deleteLater();
     m_createdWindow = nullptr;
 }
