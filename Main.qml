@@ -37,10 +37,7 @@ Window {
 
         Button {
             text: "Close"
-            onClicked: {
-                container.window = null
-                windowCreator.closeWindow()
-            }
+            onClicked: windowCreator.closeWindow()
         }
     }
 
