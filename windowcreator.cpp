@@ -13,13 +13,6 @@ WindowCreator::~WindowCreator() {
     qDebug() << "window creator broke";
 }
 
-// WindowCreator *WindowCreator::create(QQmlEngine *engine, QJSEngine *scriptEngine) {
-//     Q_UNUSED(engine)
-//     Q_UNUSED(scriptEngine)
-
-//     return new WindowCreator(engine);
-// }
-
 void WindowCreator::getWindow(QQmlComponent *component) {
     if (component->status() == QQmlComponent::Error) {
         emit error(component->errorString());
@@ -40,7 +33,7 @@ void WindowCreator::getWindow(QQmlComponent *component) {
 }
 
 void WindowCreator::createWindow() {
-    if (m_createdWindow) delete m_createdWindow;
+    if (m_createdWindow) QObject::deleteLater(m_createdWindow);
     QQmlComponent *component = new QQmlComponent(&m_engine, QUrl(QStringLiteral("qrc:/WindowInWindow/Main.qml")), &m_engine);
     if (component->isLoading())
         QObject::connect(component, &QQmlComponent::statusChanged,
@@ -49,6 +42,6 @@ void WindowCreator::createWindow() {
 }
 
 void WindowCreator::closeWindow() {
-    delete m_createdWindow;
+    QObject::deleteLater(m_createdWindow);
     m_createdWindow = nullptr;
 }
